@@ -2,9 +2,11 @@ package beans;
 
 import dao.SchoolDAO;
 import tables.School;
+import utils.CommonUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class SchoolBean implements Serializable{
     @EJB
     SchoolDAO schoolDAO;
+
+    @Inject
+    CommonUtils util;
 
     public School getSchool() {
         return school;
@@ -33,5 +38,6 @@ public class SchoolBean implements Serializable{
         schoolDAO.add(school);
         school = new School();
 
+        util.redirectWithGet();
     }
 }

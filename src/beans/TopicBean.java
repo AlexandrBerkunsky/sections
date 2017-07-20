@@ -2,9 +2,11 @@ package beans;
 
 import dao.TopicDAO;
 import tables.Topic;
+import utils.CommonUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class TopicBean implements Serializable{
     @EJB
     TopicDAO topicDAO;
+
+    @Inject
+    CommonUtils util;
 
     private Topic topic = new Topic();
 
@@ -32,5 +37,7 @@ public class TopicBean implements Serializable{
     public void add(){
         topicDAO.add(topic);
         topic = new Topic();
+
+        util.redirectWithGet();
     }
 }

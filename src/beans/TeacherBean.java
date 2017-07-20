@@ -2,9 +2,11 @@ package beans;
 
 import dao.TeacherDAO;
 import tables.Teacher;
+import utils.CommonUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class TeacherBean implements Serializable {
     @EJB
     TeacherDAO teacherDAO;
+
+    @Inject
+    CommonUtils util;
 
     public Teacher getTeacher() {
         return teacher;
@@ -34,5 +39,7 @@ public class TeacherBean implements Serializable {
         System.out.println(">>>" + teacher.getName());
         teacherDAO.add(teacher);
         teacher = new Teacher();
+
+        util.redirectWithGet();
     }
 }
