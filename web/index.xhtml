@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <title>Школы</title>
+</h:head>
+<h:body>
+   <h:panelGroup rendered="#{not empty schoolBean.schools}">
+      <h1>Школы</h1>
+      <p:dataTable var="school" value="#{schoolBean.schools}" resizableColumns="true" >
+      <p:column headerText="Школа" style="width: 400px;">
+         <h:outputText value="#{school.name}"/>
+      </p:column>
+      <p:column headerText="Телефон" style="width: 100px;">
+         <h:outputText value="#{school.phone}"/>
+      </p:column>
+      <p:column headerText="Адрес">
+         <h:outputText value="#{school.address}"/>
+      </p:column>
+   </p:dataTable>
+   </h:panelGroup>
+
+
+   <h:panelGroup rendered="#{not empty topicBean.topics}">
+      <h1>Направления</h1>
+      <p:dataTable var="topic" value="#{topicBean.topics}" resizableColumns="true">
+      <p:column headerText="№" style="width: 50px">
+         <h:outputText value="#{topic.id}"/>
+      </p:column>
+      <p:column headerText="Направление">
+         <h:outputText value="#{topic.title}"/>
+      </p:column>
+   </p:dataTable>
+   </h:panelGroup>
+
+   <h:panelGroup rendered="#{not empty teacherBean.teachers}">
+      <h1>Учителя</h1>
+      <p:dataTable var="teacher" value="#{teacherBean.teachers}" resizableColumns="true">
+         <p:column headerText="Фамилия" style="width: 150px">
+            <h:outputText value="#{teacher.surname}"/>
+         </p:column>
+         <p:column headerText="Имя" style="width: 150px">
+            <h:outputText value="#{teacher.name}"/>
+         </p:column>
+         <p:column headerText="Отчество" style="width: 150px">
+            <h:outputText value="#{teacher.name2}"/>
+         </p:column>
+         <p:column headerText="Телефон" style="width: 150px">
+            <h:outputText value="#{teacher.phone}"/>
+         </p:column>
+      </p:dataTable>
+   </h:panelGroup>
+</h:body>
+</html>
