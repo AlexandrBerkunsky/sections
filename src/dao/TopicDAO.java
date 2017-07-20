@@ -15,4 +15,8 @@ public class TopicDAO {
     public List<Topic> findAll(){
         return em.createQuery("select t from Topic t").getResultList();
     }
+
+    public void add(Topic topic) {
+        em.persist(topic);
+    }
 }

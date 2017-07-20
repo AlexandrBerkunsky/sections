@@ -25,6 +25,19 @@
    </p:dataTable>
    </h:panelGroup>
 
+   <h:panelGroup>
+      <h:form>
+         <h:panelGrid columns="2" cellpadding="5">
+         <p:outputLabel value="Школа" for="name"/>
+         <p:inputText value="#{schoolBean.school.name}" id="name" required="true"/>
+         <p:outputLabel value="Телефон" for="phone"/>
+         <p:inputText value="#{schoolBean.school.phone}" id="phone" required="true"/>
+         <p:outputLabel value="Адрес" for="address"/>
+         <p:inputText value="#{schoolBean.school.address}" id="address"/>
+         </h:panelGrid>
+         <p:commandButton action="#{schoolBean.add}" value="Добавить школу" ajax="false"/>
+      </h:form>
+   </h:panelGroup>
 
    <h:panelGroup rendered="#{not empty topicBean.topics}">
       <h1>Направления</h1>
@@ -36,6 +49,16 @@
          <h:outputText value="#{topic.title}"/>
       </p:column>
    </p:dataTable>
+   </h:panelGroup>
+
+   <h:panelGroup>
+      <h:form>
+         <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel value="Направление" for="topicname"/>
+            <p:inputText value="#{topicBean.topic.title}" id="topicname" required="true"/>
+         </h:panelGrid>
+         <p:commandButton action="#{topicBean.add}" value="Добавить направление" ajax="false"/>
+      </h:form>
    </h:panelGroup>
 
    <h:panelGroup rendered="#{not empty teacherBean.teachers}">
@@ -55,5 +78,22 @@
          </p:column>
       </p:dataTable>
    </h:panelGroup>
+
+   <h:panelGroup>
+      <h:form>
+         <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel value="Фамилия" for="fam"/>
+            <p:inputText value="#{teacherBean.teacher.surname}" id="fam" required="true"/>
+            <p:outputLabel value="Имя" for="nameteacher"/>
+            <p:inputText value="#{teacherBean.teacher.name}" id="nameteacher" required="true"/>
+            <p:outputLabel value="Отчество" for="otteacher" />
+            <p:inputText value="#{teacherBean.teacher.name2}" id="otteacher"  required="true"/>
+            <p:outputLabel value="Телефон" for="phoneteacher"/>
+            <p:inputText value="#{teacherBean.teacher.phone}" id="phoneteacher"  required="true"/>
+         </h:panelGrid>
+         <p:commandButton action="#{teacherBean.add}" value="Добавить учителя" ajax="false"/>
+      </h:form>
+   </h:panelGroup>
+
 </h:body>
 </html>

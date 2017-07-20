@@ -15,4 +15,8 @@ public class SchoolDAO {
     public List<School> findAll(){
         return em.createQuery("select s from School s").getResultList();
     }
+
+    public void add(School school) {
+        em.persist(school);
+    }
 }

@@ -15,4 +15,8 @@ public class TeacherDAO {
     public List<Teacher> findAll(){
         return em.createQuery("select t from Teacher t").getResultList();
     }
+
+    public void add(Teacher teacher) {
+        em.persist(teacher);
+    }
 }
