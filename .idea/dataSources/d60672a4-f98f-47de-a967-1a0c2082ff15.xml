@@ -6,76 +6,83 @@
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <schema id="3" parent="1" name="database1"/>
-    <schema id="4" parent="1" name="information_schema"/>
-    <schema id="5" parent="1" name="mysql"/>
-    <schema id="6" parent="1" name="performance_schema"/>
-    <schema id="7" parent="1" name="phpmyadmin"/>
-    <schema id="8" parent="1" name="test"/>
-    <table id="9" parent="2" name="school"/>
-    <table id="10" parent="2" name="teacher"/>
-    <table id="11" parent="2" name="topic"/>
-    <column id="12" parent="9" name="ID">
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="phpmyadmin"/>
+    <schema id="7" parent="1" name="test"/>
+    <schema id="8" parent="1" name="art"/>
+    <schema id="9" parent="1" name="booksnew3"/>
+    <schema id="10" parent="1" name="example0704"/>
+    <schema id="11" parent="1" name="movies"/>
+    <schema id="12" parent="1" name="movies1"/>
+    <schema id="13" parent="1" name="person"/>
+    <schema id="14" parent="1" name="webdiplom"/>
+    <schema id="15" parent="1" name="z2803"/>
+    <table id="16" parent="2" name="school"/>
+    <table id="17" parent="2" name="teacher"/>
+    <table id="18" parent="2" name="topic"/>
+    <column id="19" parent="16" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="13" parent="9" name="ADDRESS">
+    <column id="20" parent="16" name="ADDRESS">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="14" parent="9" name="NAME">
+    <column id="21" parent="16" name="NAME">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="15" parent="9" name="PHONE">
+    <column id="22" parent="16" name="PHONE">
       <Position>4</Position>
       <DataType>varchar(40)|0</DataType>
     </column>
-    <key id="16" parent="9" name="PRIMARY">
+    <key id="23" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="17" parent="10" name="ID">
+    <column id="24" parent="17" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="18" parent="10" name="NAME">
+    <column id="25" parent="17" name="NAME">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="19" parent="10" name="NAME2">
+    <column id="26" parent="17" name="NAME2">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="20" parent="10" name="PHONE">
+    <column id="27" parent="17" name="PHONE">
       <Position>4</Position>
       <DataType>varchar(40)|0</DataType>
     </column>
-    <column id="21" parent="10" name="SURNAME">
+    <column id="28" parent="17" name="SURNAME">
       <Position>5</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <key id="22" parent="10" name="PRIMARY">
+    <key id="29" parent="17" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="23" parent="11" name="ID">
+    <column id="30" parent="18" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="24" parent="11" name="TITLE">
+    <column id="31" parent="18" name="TITLE">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <key id="25" parent="11" name="PRIMARY">
+    <key id="32" parent="18" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
