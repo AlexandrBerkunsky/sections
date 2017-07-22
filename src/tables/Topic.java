@@ -8,6 +8,14 @@ public class Topic {
     @Id
     private int id;
 
+    public Topic(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public Topic() {
+    }
+
     public int getId() {
         return id;
     }
@@ -27,4 +35,5 @@ public class Topic {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }

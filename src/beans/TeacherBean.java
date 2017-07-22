@@ -19,7 +19,6 @@ public class TeacherBean implements Serializable {
 
     @Inject
     CommonUtils util;
-
     public Teacher getTeacher() {
         return teacher;
     }
@@ -28,18 +27,51 @@ public class TeacherBean implements Serializable {
         this.teacher = teacher;
     }
 
+    private Boolean edit;
+
+    public Boolean getEdit() {
+        return edit;
+    }
+
     private Teacher teacher = new Teacher();
+
 
     public List<Teacher> getTeachers(){
         return teacherDAO.findAll();
     }
 
     public void add() {
-        //TODO Проверить, почему не добавляется
-        System.out.println(">>>" + teacher.getName());
         teacherDAO.add(teacher);
         teacher = new Teacher();
 
         util.redirectWithGet();
     }
+
+    public void delete(int id) {
+        teacherDAO.delete(id);
+        util.redirectWithGet();
+    }
+
+    public void editTeacher(Teacher teacher){
+        this.teacher = teacher;
+        edit = true;
+
+        util.redirectWithGet();
+    }
+
+    public void saveEdit(){
+        teacherDAO.save(teacher);
+        this.teacher = new Teacher();
+        edit = false;
+
+        util.redirectWithGet();
+    }
+
+    public void cancelEdit(){
+        this.teacher = new Teacher();
+        edit = false;
+
+        util.redirectWithGet();
+    }
+
 }

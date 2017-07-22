@@ -8,6 +8,17 @@ public class Teacher {
     @Id
     private int id;
 
+    public Teacher(int id, String surname, String name, String name2, String phone) {
+        this.id = id;
+        this.surname = surname;
+        this.name = name;
+        this.name2 = name2;
+        this.phone = phone;
+    }
+
+    public Teacher() {
+    }
+
     public int getId() {
         return id;
     }
@@ -63,4 +74,5 @@ public class Teacher {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 }

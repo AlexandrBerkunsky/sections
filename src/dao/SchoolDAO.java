@@ -19,4 +19,17 @@ public class SchoolDAO {
     public void add(School school) {
         em.persist(school);
     }
+
+    public void delete(int id) {
+        School school = em.find(School.class, id);
+        em.remove(school);
+    }
+
+    public void edit(School school) {
+
+    }
+
+    public void save(School school) {
+        em.merge(school);
+    }
 }

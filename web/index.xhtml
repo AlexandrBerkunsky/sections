@@ -7,93 +7,180 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-   <title>Школы</title>
+    <title>Школы</title>
 </h:head>
 <h:body>
-   <h:panelGroup rendered="#{not empty schoolBean.schools}">
-      <h1>Школы</h1>
-      <p:dataTable var="school" value="#{schoolBean.schools}" resizableColumns="true" >
-      <p:column headerText="Школа" style="width: 400px;">
-         <h:outputText value="#{school.name}"/>
-      </p:column>
-      <p:column headerText="Телефон" style="width: 100px;">
-         <h:outputText value="#{school.phone}"/>
-      </p:column>
-      <p:column headerText="Адрес">
-         <h:outputText value="#{school.address}"/>
-      </p:column>
-   </p:dataTable>
-   </h:panelGroup>
+    <h:panelGroup rendered="#{not empty schoolBean.schools}">
+        <h1>Школы</h1>
+        <h:form>
 
-   <h:panelGroup>
-      <h:form>
-         <h:panelGrid columns="2" cellpadding="5">
-         <p:outputLabel value="Школа" for="name"/>
-         <p:inputText value="#{schoolBean.school.name}" id="name" required="true"/>
-         <p:outputLabel value="Телефон" for="phone"/>
-         <p:inputText value="#{schoolBean.school.phone}" id="phone" required="true"/>
-         <p:outputLabel value="Адрес" for="address"/>
-         <p:inputText value="#{schoolBean.school.address}" id="address"/>
-         </h:panelGrid>
-         <p:commandButton action="#{schoolBean.add}" value="Добавить школу" ajax="false"/>
-      </h:form>
-   </h:panelGroup>
+            <p:dataTable var="school" value="#{schoolBean.schools}" resizableColumns="true">
+                <p:column headerText="Школа" style="width: 400px;">
+                    <h:outputText value="#{school.name}"/>
+                </p:column>
+                <p:column headerText="Телефон" style="width: 100px;">
+                    <h:outputText value="#{school.phone}"/>
+                </p:column>
+                <p:column headerText="Адрес">
+                    <h:outputText value="#{school.address}"/>
+                </p:column>
+                <p:column headerText="Правка" style="width: 75px; text-align: center" >
+                    <p:commandButton actionListener="#{schoolBean.editSchool(school)}" icon="ui-icon-pencil"/>
+                </p:column>
+                <p:column headerText="Удалить" style="width: 75px; text-align: center">
+                    <p:commandButton actionListener="#{schoolBean.delete(school.id)}" icon="ui-icon-trash">
+                        <p:confirm header="Подтверждение удаления" message="Вы уверены?" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+        </h:form>
+    </h:panelGroup>
 
-   <h:panelGroup rendered="#{not empty topicBean.topics}">
-      <h1>Направления</h1>
-      <p:dataTable var="topic" value="#{topicBean.topics}" resizableColumns="true">
-      <p:column headerText="№" style="width: 50px">
-         <h:outputText value="#{topic.id}"/>
-      </p:column>
-      <p:column headerText="Направление">
-         <h:outputText value="#{topic.title}"/>
-      </p:column>
-   </p:dataTable>
-   </h:panelGroup>
+    <h:panelGroup rendered="#{!schoolBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Школа" for="name"/>
+                <p:inputText value="#{schoolBean.school.name}" id="name" required="true"/>
+                <p:outputLabel value="Телефон" for="phone"/>
+                <p:inputText value="#{schoolBean.school.phone}" id="phone" required="true"/>
+                <p:outputLabel value="Адрес" for="address"/>
+                <p:inputText value="#{schoolBean.school.address}" id="address"/>
+            </h:panelGrid>
+            <p:commandButton action="#{schoolBean.add}" icon="ui-icon-plus" value="Добавить школу" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
 
-   <h:panelGroup>
-      <h:form>
-         <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel value="Направление" for="topicname"/>
-            <p:inputText value="#{topicBean.topic.title}" id="topicname" required="true"/>
-         </h:panelGrid>
-         <p:commandButton action="#{topicBean.add}" value="Добавить направление" ajax="false"/>
-      </h:form>
-   </h:panelGroup>
+    <h:panelGroup rendered="#{schoolBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Школа" for="nameedit"/>
+                <p:inputText value="#{schoolBean.school.name}" id="nameedit" required="true"/>
+                <p:outputLabel value="Телефон" for="phoneedit"/>
+                <p:inputText value="#{schoolBean.school.phone}" id="phoneedit" required="true"/>
+                <p:outputLabel value="Адрес" for="addressedit"/>
+                <p:inputText value="#{schoolBean.school.address}" id="addressedit"/>
+            </h:panelGrid>
+            <p:commandButton action="#{schoolBean.saveEdit}" icon="ui-icon-check" value="Сохранить" ajax="false"/>
+            <p:commandButton action="#{schoolBean.cancelEdit}" icon="ui-icon-cancel" value="Отменить" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
 
-   <h:panelGroup rendered="#{not empty teacherBean.teachers}">
-      <h1>Учителя</h1>
-      <p:dataTable var="teacher" value="#{teacherBean.teachers}" resizableColumns="true">
-         <p:column headerText="Фамилия" style="width: 150px">
-            <h:outputText value="#{teacher.surname}"/>
-         </p:column>
-         <p:column headerText="Имя" style="width: 150px">
-            <h:outputText value="#{teacher.name}"/>
-         </p:column>
-         <p:column headerText="Отчество" style="width: 150px">
-            <h:outputText value="#{teacher.name2}"/>
-         </p:column>
-         <p:column headerText="Телефон" style="width: 150px">
-            <h:outputText value="#{teacher.phone}"/>
-         </p:column>
-      </p:dataTable>
-   </h:panelGroup>
+    <h:panelGroup rendered="#{not empty topicBean.topics}">
+        <h1>Направления</h1>
+        <h:form>
+            <p:dataTable var="topic" value="#{topicBean.topics}" resizableColumns="true">
+                <p:column headerText="№" style="width: 50px">
+                    <h:outputText value="#{topic.id}"/>
+                </p:column>
+                <p:column headerText="Направление">
+                    <h:outputText value="#{topic.title}"/>
+                </p:column>
+                <p:column headerText="Правка" style="width: 75px; text-align: center">
+                    <p:commandButton actionListener="#{topicBean.editTopic(topic)}" icon="ui-icon-pencil"/>
 
-   <h:panelGroup>
-      <h:form>
-         <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel value="Фамилия" for="fam"/>
-            <p:inputText value="#{teacherBean.teacher.surname}" id="fam" required="true"/>
-            <p:outputLabel value="Имя" for="nameteacher"/>
-            <p:inputText value="#{teacherBean.teacher.name}" id="nameteacher" required="true"/>
-            <p:outputLabel value="Отчество" for="otteacher" />
-            <p:inputText value="#{teacherBean.teacher.name2}" id="otteacher"  required="true"/>
-            <p:outputLabel value="Телефон" for="phoneteacher"/>
-            <p:inputText value="#{teacherBean.teacher.phone}" id="phoneteacher"  required="true"/>
-         </h:panelGrid>
-         <p:commandButton action="#{teacherBean.add}" value="Добавить учителя" ajax="false"/>
-      </h:form>
-   </h:panelGroup>
+                </p:column>
+                <p:column headerText="Удалить" style="width: 75px; text-align: center">
+                    <p:commandButton actionListener="#{topicBean.delete(topic.id)}" icon="ui-icon-trash">
+                        <p:confirm header="Подтверждение удаления" message="Вы уверены?" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{!topicBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Направление" for="topicname"/>
+                <p:inputText value="#{topicBean.topic.title}" id="topicname" required="true"/>
+            </h:panelGrid>
+            <p:commandButton action="#{topicBean.add}" icon="ui-icon-plus" value="Добавить направление" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{topicBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Направление" for="topicnameedit"/>
+                <p:inputText value="#{topicBean.topic.title}" id="topicnameedit" required="true"/>
+            </h:panelGrid>
+            <p:commandButton action="#{topicBean.saveEdit}" icon="ui-icon-check" value="Сохранить" ajax="false"/>
+            <p:commandButton action="#{topicBean.cancelEdit}" icon="ui-icon-cancel" value="Отменить" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{not empty teacherBean.teachers}">
+        <h1>Учителя</h1>
+        <h:form>
+            <p:dataTable var="teacher" value="#{teacherBean.teachers}" resizableColumns="true">
+                <p:column headerText="Фамилия">
+                    <h:outputText value="#{teacher.surname}"/>
+                </p:column>
+                <p:column headerText="Имя" style="width: 150px">
+                    <h:outputText value="#{teacher.name}"/>
+                </p:column>
+                <p:column headerText="Отчество" style="width: 150px">
+                    <h:outputText value="#{teacher.name2}"/>
+                </p:column>
+                <p:column headerText="Телефон" style="width: 150px">
+                    <h:outputText value="#{teacher.phone}"/>
+                </p:column>
+                <p:column headerText="Правка" style="width: 75px; text-align: center">
+                    <p:commandButton actionListener="#{teacherBean.editTeacher(teacher)}" icon="ui-icon-pencil"/>
+                </p:column>
+                <p:column headerText="Удалить" style="width: 75px; text-align: center">
+                    <p:commandButton actionListener="#{teacherBean.delete(teacher.id)}" icon="ui-icon-trash">
+                        <p:confirm header="Подтверждение удаления" message="Вы уверены?" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+            </p:confirmDialog>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{!teacherBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Фамилия" for="fam"/>
+                <p:inputText value="#{teacherBean.teacher.surname}" id="fam" required="true"/>
+                <p:outputLabel value="Имя" for="nameteacher"/>
+                <p:inputText value="#{teacherBean.teacher.name}" id="nameteacher" required="true"/>
+                <p:outputLabel value="Отчество" for="otteacher"/>
+                <p:inputText value="#{teacherBean.teacher.name2}" id="otteacher" required="true"/>
+                <p:outputLabel value="Телефон" for="phoneteacher"/>
+                <p:inputText value="#{teacherBean.teacher.phone}" id="phoneteacher" required="true"/>
+            </h:panelGrid>
+            <p:commandButton action="#{teacherBean.add}" icon="ui-icon-plus" value="Добавить учителя" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{teacherBean.edit}">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Фамилия" for="famedit"/>
+                <p:inputText value="#{teacherBean.teacher.surname}" id="famedit" required="true"/>
+                <p:outputLabel value="Имя" for="nameteacheredit"/>
+                <p:inputText value="#{teacherBean.teacher.name}" id="nameteacheredit" required="true"/>
+                <p:outputLabel value="Отчество" for="otteacheredit"/>
+                <p:inputText value="#{teacherBean.teacher.name2}" id="otteacheredit" required="true"/>
+                <p:outputLabel value="Телефон" for="phoneteacheredit"/>
+                <p:inputText value="#{teacherBean.teacher.phone}" id="phoneteacheredit" required="true"/>
+            </h:panelGrid>
+            <p:commandButton action="#{teacherBean.saveEdit}" icon="ui-icon-check" value="Сохранить" ajax="false"/>
+            <p:commandButton action="#{teacherBean.cancelEdit}" icon="ui-icon-cancel" value="Отменить" ajax="false"/>
+        </h:form>
+    </h:panelGroup>
 
 </h:body>
 </html>

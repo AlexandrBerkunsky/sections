@@ -17,6 +17,10 @@ public class TopicBean implements Serializable{
     @EJB
     TopicDAO topicDAO;
 
+    private Boolean edit;
+
+
+
     @Inject
     CommonUtils util;
 
@@ -37,6 +41,37 @@ public class TopicBean implements Serializable{
     public void add(){
         topicDAO.add(topic);
         topic = new Topic();
+
+        util.redirectWithGet();
+    }
+
+    public void delete(int id){
+        topicDAO.delete(id);
+        util.redirectWithGet();
+    }
+
+    public Boolean getEdit() {
+        return edit;
+    }
+
+    public void editTopic(Topic topic){
+        this.topic = topic;
+        edit = true;
+
+        util.redirectWithGet();
+    }
+
+    public void saveEdit(){
+        topicDAO.save(topic);
+        this.topic = new Topic();
+        edit = false;
+
+        util.redirectWithGet();
+    }
+
+    public void cancelEdit(){
+        this.topic = new Topic();
+        edit = false;
 
         util.redirectWithGet();
     }

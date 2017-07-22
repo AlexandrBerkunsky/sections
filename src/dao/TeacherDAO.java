@@ -19,4 +19,13 @@ public class TeacherDAO {
     public void add(Teacher teacher) {
         em.persist(teacher);
     }
+
+    public void delete(int id) {
+        Teacher teacher = em.find(Teacher.class, id);
+        em.remove(teacher);
+    }
+
+    public void save(Teacher teacher) {
+        em.merge(teacher);
+    }
 }

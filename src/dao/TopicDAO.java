@@ -19,4 +19,13 @@ public class TopicDAO {
     public void add(Topic topic) {
         em.persist(topic);
     }
+
+    public void delete(int id) {
+        Topic topic = em.find(Topic.class, id);
+        em.remove(topic);
+    }
+
+    public void save(Topic topic) {
+        em.merge(topic);
+    }
 }

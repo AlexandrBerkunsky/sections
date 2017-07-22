@@ -8,6 +8,22 @@ public class School {
     @Id
     private int id;
 
+    public School(String name, String phone, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public School(int id, String name, String phone, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.id = id;
+    }
+
+    public School() {
+    }
+
     public int getId() {
         return id;
     }
@@ -50,4 +66,6 @@ public class School {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 }
