@@ -41,7 +41,6 @@ public class TopicBean implements Serializable{
     public void add(){
         topicDAO.add(topic);
         topic = new Topic();
-
         util.redirectWithGet();
     }
 
